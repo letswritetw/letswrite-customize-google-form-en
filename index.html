@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Fully custom Google Forms</title>
+  <link rel="canonical" href="https://letswrite.tw/custom-google-form-en/">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+
+  <!-- customized style -->
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    html, body, .container, .row {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .container {
+      max-width: 100%;
+    }
+    button {
+      font-size: 16px;
+    }
+
+    .half {
+      position: fixed;
+      margin: 0;
+      width: 50% !important;
+      height: 100%;
+    }
+    .bg {
+      background: url('https://picsum.photos/id/883/1920/1024/') center center;
+      background-size: cover;
+    }
+    .form {
+      left: 50%;
+      overflow: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    h1, form {
+      width: 100%;
+    }
+    h1 {
+      padding-top: 16px;
+      text-align: center;
+    }
+    form {
+      margin-right: auto;
+      margin-left: auto;
+      max-width: 400px;
+    }
+    .input-group {
+      margin-bottom: 30px;
+    }
+    .radio-group label {
+      display: inline-block;
+    }
+    textarea {
+      min-height: 100px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      .half {
+        position: static;
+        width: 100% !important;
+        height: auto;
+      }
+      .bg {
+        height: 30vh;
+      }
+      form {
+        padding-right: 12px;
+        padding-left: 12px;
+      }
+    }
+    
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <main class="row">
+      <!-- bg -->
+      <section class="six columns half bg"></section>
+      
+      <!-- form -->
+      <section class="six columns half form">
+        <h1>Contact us</h1>
+        <form>
+          <!-- name -->
+          <div class="input-group">
+            <label for="demo_name">Name</label>
+            <input class="u-full-width" type="text" placeholder="please enter your name" id="demo_name">
+          </div>
+
+          <!-- gender -->
+          <div class="input-group">
+            <label>Gender</label>
+            <div class="radio-group row">
+              <!-- male -->
+              <div class="four columns">
+                <input type="radio" id="male" name="demo_radio" value="male" checked>
+                <label for="male">Male</label>
+              </div>
+
+              <!-- female -->
+              <div class="four columns">
+                <input type="radio" id="female" name="demo_radio" value="female">
+                <label for="female">Female</label>
+              </div>
+
+              <!-- legal -->
+              <div class="four columns">
+                <input type="radio" id="legal" name="demo_radio" value="legal">
+                <label for="legal">Legal</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- category -->
+          <div class="input-group">
+            <label for="demo_select">Category</label>
+            <select class="u-full-width" id="demo_select">
+              <option value="0" value="0" selected disabled>choose one</option>
+              <option value="cat">Cat</option>
+              <option value="dog">Dog</option>
+              <option value="bear">Bear</option>
+            </select>
+          </div>
+
+          <!-- question -->
+          <div class="input-group">
+            <label for="demo_textarea">Question</label>
+            <textarea class="u-full-width" id="demo_textarea"></textarea>
+          </div>
+
+          <button type="button" id="submit" class="button-primary u-full-width">Confirm</button>
+
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    $(function() {
+      $('#submit').on('click', function() {
+        
+        // name
+        var name = $('#demo_name').val() || 'no set';
+
+        // gender
+        var gender = function() {
+          var v;
+          $('[name="demo_radio"]').each(function() {
+            if($(this).prop('checked') === true) v = $(this).val();
+          });
+          return v;
+        };
+
+        // category
+        var cat = $('#demo_select').val() || 'no set';
+
+        // question
+        var question = $('#demo_textarea').val() || 'no set';
+
+        // post
+        var data = {
+          'entry.2065974955': name,
+          'entry.1310259066': gender(),
+          'entry.896842914': cat,
+          'entry.1857722787': question
+        };
+        $.ajax({
+          type: 'POST',
+          url: 'https://docs.google.com/forms/d/e/1FAIpQLScxpBiexGfPha5_vq1fos2r_9dl1QfkCJBvHWHRIbgwudOHaQ/formResponse',
+          data: data,
+          contentType: 'application/json',
+          dataType: 'jsonp',
+          complete: function() {
+            alert('send success');
+          }
+        });
+        
+      });
+    });
+  </script>
+  
+</body>
+</html>
