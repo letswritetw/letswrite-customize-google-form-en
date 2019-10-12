@@ -6,7 +6,7 @@
 
 
 ### Test Demo
-[https://auguston.github.io/medium-customize-google-form-en/](https://auguston.github.io/medium-customize-google-form-en/)
+[https://auguston.github.io/letswrite-customize-google-form-en/](https://auguston.github.io/letswrite-customize-google-form-en/)
 
 
 ---
