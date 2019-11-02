@@ -1,12 +1,12 @@
 ### How to use
-[Fully customizable Google Forms](https://letswrite.tw/custom-google-form-en/)
+[Fully customizable Google Forms](https://en.letswrite.tw/custom-google-form/)
 
 
 ---
 
 
 ### Test Demo
-[https://auguston.github.io/letswrite-customize-google-form-en/](https://auguston.github.io/letswrite-customize-google-form-en/)
+[https://auguston.github.io/letswrite-customize-google-form-en/](https://letswritetw.github.io/letswrite-customize-google-form-en/)
 
 
 ---
